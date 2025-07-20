@@ -1,23 +1,28 @@
 
 'use server';
 
+import { Resend } from 'resend';
+import crypto from 'crypto';
+import VerifyEmail from '@/components/emails/verify-email';
+
 // !!! UYARI: Bu, GÖSTERİM AMAÇLI sahte bir kimlik doğrulama servisidir. !!!
-// !!! Üretim ortamında KESİNLİKLE kullanılmamalıdır. !!!
-// Gerçek bir uygulamada, Firebase Authentication, Auth.js (NextAuth),
-// veya başka bir güvenli kimlik doğrulama sağlayıcısı kullanın.
+// Gerçek bir uygulamada, Firebase Authentication, Auth.js (NextAuth), vb. kullanın.
+
+// Doğrudan API anahtarını kullanıyoruz (test amaçlı)
+const resend = new Resend('re_Akamv5kD_CMywTwktHwfR1FyWocUS8ojm');
+const domain = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:9002';
 
 interface User {
   id: string;
   username: string;
   email: string;
-  passwordHash: string; // Gerçekte şifreyi asla düz metin olarak saklamayın.
+  passwordHash: string;
   avatar?: string;
+  emailVerified: boolean;
+  verificationToken: string | null;
 }
 
 // -- START: Sahte Veritabanı Düzeltmesi --
-// Next.js'in geliştirme modunda her istekte modülleri yeniden yüklemesi nedeniyle,
-// kullanıcı listesini global bir değişkende saklıyoruz.
-// Bu, kullanıcıların uygulama yeniden başlatılana kadar korunmasını sağlar.
 declare global {
   var __users_db__: User[];
 }
@@ -28,9 +33,10 @@ if (!global.__users_db__) {
       id: '1',
       username: 'demo',
       email: 'demo@dinletiyo.com',
-      // "password123" için sahte hash
       passwordHash: 'hashed:password123',
       avatar: 'https://placehold.co/100x100.png',
+      emailVerified: true, // Demo kullanıcısı doğrulanmış olsun
+      verificationToken: null,
     },
   ];
 }
@@ -38,59 +44,84 @@ if (!global.__users_db__) {
 const users = global.__users_db__;
 // -- END: Sahte Veritabanı Düzeltmesi --
 
-
-export async function signup(userData: Omit<User, 'id' | 'passwordHash'> & { password: string }) {
-  // E-postanın zaten kullanımda olup olmadığını kontrol et
+export async function signup(userData: Omit<User, 'id' | 'passwordHash' | 'emailVerified' | 'verificationToken'> & { password: string }) {
   const existingUser = users.find(u => u.email === userData.email);
   if (existingUser) {
     throw new Error('Bu e-posta adresi zaten kullanılıyor.');
   }
 
-  // Yeni kullanıcı oluştur
+  const verificationToken = crypto.randomBytes(32).toString('hex');
+
   const newUser: User = {
     id: String(users.length + 1),
     username: userData.username,
     email: userData.email,
-    // Gerçek bir uygulamada burada bcrypt gibi bir kütüphane ile şifre hash'lenir.
     passwordHash: `hashed:${userData.password}`,
-    avatar: 'https://placehold.co/100x100.png', // Default avatar
+    avatar: 'https://placehold.co/100x100.png',
+    emailVerified: false,
+    verificationToken: verificationToken,
   };
 
   users.push(newUser);
-  console.log('Kullanıcı kaydedildi:', newUser.email);
-  console.log('Tüm kullanıcılar:', users.map(u => u.email));
-  return { id: newUser.id, username: newUser.username, email: newUser.email, avatar: newUser.avatar };
+
+  const verificationLink = `${domain}/api/verify-email?token=${verificationToken}`;
+
+  try {
+    await resend.emails.send({
+      from: 'Dinletiyo <onboarding@resend.dev>',
+      to: newUser.email,
+      subject: 'Dinletiyo Hesabınızı Doğrulayın',
+      react: VerifyEmail({ verificationLink }),
+    });
+    console.log('Doğrulama e-postası gönderildi:', newUser.email);
+  } catch (error) {
+    console.error('E-posta gönderim hatası:', error);
+    // Hata durumunda kullanıcıyı silmek veya başka bir işlem yapmak isteyebilirsiniz.
+    throw new Error('Doğrulama e-postası gönderilemedi.');
+  }
+
+  return { message: 'Kayıt başarılı! Lütfen e-postanızı kontrol ederek hesabınızı doğrulayın.' };
 }
 
 export async function login(email: string, password_raw: string) {
-  console.log('Giriş denemesi:', email);
-  console.log('Tüm kullanıcılar:', users.map(u => u.email));
-  
   const user = users.find(u => u.email === email);
 
   if (!user) {
     throw new Error('Böyle bir kullanıcı bulunamadı.');
   }
 
-  // Şifre kontrolü (sahte)
   const isPasswordCorrect = `hashed:${password_raw}` === user.passwordHash;
 
   if (!isPasswordCorrect) {
     throw new Error('Şifre yanlış.');
   }
 
+  if (!user.emailVerified) {
+    throw new Error('Giriş yapmadan önce lütfen e-posta adresinizi doğrulayın.');
+  }
+
   console.log('Giriş başarılı:', user.email);
   return { id: user.id, username: user.username, email: user.email, avatar: user.avatar };
 }
 
+export async function verifyEmailToken(token: string) {
+  const user = users.find(u => u.verificationToken === token);
+
+  if (!user) {
+    throw new Error('Geçersiz veya süresi dolmuş doğrulama kodu.');
+  }
+
+  user.emailVerified = true;
+  user.verificationToken = null; // Token'ı kullandıktan sonra temizle
+
+  console.log('E-posta doğrulandı:', user.email);
+  return { message: 'E-posta adresiniz başarıyla doğrulandı!' };
+}
+
 export async function updateProfile(userId: string, data: { username?: string; avatar?: string }) {
-    console.log(`Profil güncelleniyor: userId=${userId}, data=`, data);
-    console.log('Güncelleme öncesi kullanıcılar:', users);
-    
     const userIndex = users.findIndex(u => u.id === userId);
 
     if (userIndex === -1) {
-        console.error('Güncellenecek kullanıcı bulunamadı! ID:', userId);
         throw new Error('Güncellenecek kullanıcı bulunamadı.');
     }
 
@@ -105,7 +136,5 @@ export async function updateProfile(userId: string, data: { username?: string; a
     
     users[userIndex] = user;
 
-    console.log('Profil güncellendi:', user);
-    console.log('Güncelleme sonrası kullanıcılar:', users);
     return { id: user.id, username: user.username, email: user.email, avatar: user.avatar };
 }

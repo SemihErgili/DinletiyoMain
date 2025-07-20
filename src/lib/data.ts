@@ -49,18 +49,18 @@ const songs: Song[] = [
 ];
 
 const playlists: Playlist[] = [
-  { id: '1', title: 'Türkçe Pop Hits', description: 'En yeni ve en popüler Türkçe pop şarkıları.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/5c08d9b154b34f71a941f5319520b72c.png', aiHint: 'playlist cover', songs: songs.filter(s => ['1', '2', '7', '9', '13'].includes(s.id)) },
-  { id: '2', title: 'Damar Şarkılar', description: 'Ayrılık, hüzün ve isyan bir arada.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/8d8a7c6f05e34b9d889b5c3e6c0c2a4f.png', aiHint: 'arabesque playlist', songs: songs.filter(s => ['8', '12', '17'].includes(s.id)) },
-  { id: '3', title: 'Türkçe Rock Alternatif', description: 'Gitar riffleri ve anlamlı sözler.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/9611f8e1205345a58adad260655c3c0a.png', aiHint: 'rock playlist', songs: songs.filter(s => ['3', '5', '6', '10'].includes(s.id)) },
-  { id: '4', title: 'Haftanın Keşifleri', description: 'Bu hafta ne dinlesem diyenlere.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/a39bfb54020a430983d941864195748f.png', aiHint: 'discovery playlist', songs: songs.slice(6, 12) },
-  { id: '5', title: 'Antrenman Modu', description: 'Spor yaparken motivasyonun artsın.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/e8339396381442a884f5c0977c73b0a7.png', aiHint: 'workout music', songs: [songs[0], songs[2], songs[5], songs[11]] },
-  { id: '6', title: 'Yolculuk Şarkıları', description: 'Yollarda sana eşlik edecek şarkılar.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/4e9081e6992d40909f12015332f170c7.png', aiHint: 'roadtrip music', songs: [...songs].sort(() => 0.5 - Math.random()) },
-  { id: '7', title: 'Odaklanma Zamanı', description: 'Çalışırken veya okurken konsantre ol.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/229a4a75470d4f23b1858597f7bb1003.png', aiHint: 'focus playlist', songs: [songs[3], songs[9]] },
-  { id: '8', title: '90\'lar Türkçe Pop', description: 'Geçmişe bir yolculuk.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/3c2a411516014c44a0374e2354a3e47a.png', aiHint: '90s playlist', songs: [songs[1], songs[8]]},
-  { id: '9', title: 'Türkçe Rap & Trap', description: 'Sokakların sesi, yeni ritimler.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/7c4f4544d9f64a59a72bdf274d6c6e1c.png', aiHint: 'rap music playlist', songs: songs.filter(s => ['11', '14', '15', '18'].includes(s.id)) },
-  { id: '10', title: 'Yeni Nesil Pop', description: 'Popun yeni ve alternatif sesleri.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/9d4f8b9d3b1e4f4bb4e3d3683f1264b3.png', aiHint: 'new pop', songs: songs.filter(s => ['13', '15', '16', '18'].includes(s.id))},
-  { id: '11', title: 'Yeni Çıkanlar', description: 'En son çıkan hitler.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/e33652c892b543539356264936319851.png', aiHint: 'new releases', songs: songs.slice(12)},
-  { id: '12', title: 'Efsane Şarkılar', description: 'Unutulmayan klasikler.', imageUrl: 'https://lastfm.freetls.fastly.net/i/u/300x300/6ab41e9b2521487c9751e3a1050a9c80.png', aiHint: 'legendary songs', songs: songs.filter(s => ['2', '4', '8', '10', '17'].includes(s.id))},
+  { id: '1', title: 'Türkçe Pop Hits', description: 'En yeni ve en popüler Türkçe pop şarkıları.', imageUrl: '/Fotoğraflar/TÜRKÇE POP HİTS.063Z.png', aiHint: 'playlist cover', songs: songs.filter(s => ['1', '2', '7', '9', '13'].includes(s.id)) },
+  { id: '2', title: 'Damar Şarkılar', description: 'Ayrılık, hüzün ve isyan bir arada.', imageUrl: '/Fotoğraflar/damarşarkılar.917Z.png', aiHint: 'arabesque playlist', songs: songs.filter(s => ['8', '12', '17'].includes(s.id)) },
+  { id: '3', title: 'Türkçe Rock Alternatif', description: 'Gitar riffleri ve anlamlı sözler.', imageUrl: '/Fotoğraflar/TÜKRÇE ROCK.037Z.png', aiHint: 'rock playlist', songs: songs.filter(s => ['3', '5', '6', '10'].includes(s.id)) },
+  { id: '4', title: 'Haftanın Keşifleri', description: 'Bu hafta ne dinlesem diyenlere.', imageUrl: '/Fotoğraflar/haftanın keşifleri.341Z.png', aiHint: 'discovery playlist', songs: songs.slice(6, 12) },
+  { id: '5', title: 'Antrenman Modu', description: 'Spor yaparken motivasyonun artsın.', imageUrl: '/Fotoğraflar/ANTREMANMODU.333Z.png', aiHint: 'workout music', songs: [songs[0], songs[2], songs[5], songs[11]] },
+  { id: '6', title: 'Yolculuk Şarkıları', description: 'Yollarda sana eşlik edecek şarkılar.', imageUrl: '/Fotoğraflar/YOLCULUK ŞARKILARI.740Z.png', aiHint: 'roadtrip music', songs: [...songs].sort(() => 0.5 - Math.random()) },
+  { id: '7', title: 'Odaklanma Zamanı', description: 'Çalışırken veya okurken konsantre ol.', imageUrl: '/Fotoğraflar/ODAKLANMA ZAMANI.013Z.png', aiHint: 'focus playlist', songs: [songs[3], songs[9]] },
+  { id: '8', title: '90\'lar Türkçe Pop', description: 'Geçmişe bir yolculuk.', imageUrl: '/Fotoğraflar/90lar.973Z.png', aiHint: '90s playlist', songs: [songs[1], songs[8]]},
+  { id: '9', title: 'Türkçe Rap & Trap', description: 'Sokakların sesi, yeni ritimler.', imageUrl: '/Fotoğraflar/YENİNESİLRAP.797Z.png', aiHint: 'rap music playlist', songs: songs.filter(s => ['11', '14', '15', '18'].includes(s.id)) },
+  { id: '10', title: 'Yeni Nesil Pop', description: 'Popun yeni ve alternatif sesleri.', imageUrl: '/Fotoğraflar/Efsaneşarkılar.885Z.png', aiHint: 'new pop', songs: songs.filter(s => ['13', '15', '16', '18'].includes(s.id))},
+  { id: '11', title: 'Yeni Çıkanlar', description: 'En son çıkan hitler.', imageUrl: '/Fotoğraflar/elektronik dans.885Z.png', aiHint: 'new releases', songs: songs.slice(12)},
+  { id: '12', title: 'Efsane Şarkılar', description: 'Unutulmayan klasikler.', imageUrl: '/Fotoğraflar/akustik akşamlar.911Z.png', aiHint: 'legendary songs', songs: songs.filter(s => ['2', '4', '8', '10', '17'].includes(s.id))},
 ];
 
 // Sahte API fonksiyonları

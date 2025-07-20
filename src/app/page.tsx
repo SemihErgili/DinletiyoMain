@@ -11,18 +11,18 @@ const sections = [
 ];
 
 const cardData: Omit<Playlist, 'id' | 'songs'>[] = [
-    { title: "Türkçe Pop Hits", description: "En popüler parçalar", imageUrl: "https://placehold.co/300x300/ef4444/ffffff.png", aiHint: "pop music" },
-    { title: "Haftanın Keşifleri", description: "Yeni müzikler keşfet", imageUrl: "https://placehold.co/300x300/22c55e/ffffff.png", aiHint: "discovery playlist" },
-    { title: "Akustik Akşamlar", description: "Sakin ve huzurlu", imageUrl: "https://placehold.co/300x300/eab308/ffffff.png", aiHint: "acoustic guitar" },
-    { title: "Türkçe Rock", description: "Efsanevi riffler", imageUrl: "https://placehold.co/300x300/3b82f6/ffffff.png", aiHint: "rock concert" },
-    { title: "Yolculuk Şarkıları", description: "Yol arkadaşların", imageUrl: "https://placehold.co/300x300/8b5cf6/ffffff.png", aiHint: "road trip" },
-    { title: "90'lar Pop", description: "Geçmişe yolculuk", imageUrl: "https://placehold.co/300x300/ec4899/ffffff.png", aiHint: "retro cassette" },
-    { title: "Yeni Nesil Rap", description: "Sokakların sesi", imageUrl: "https://placehold.co/300x300/64748b/ffffff.png", aiHint: "urban graffiti" },
-    { title: "Elektronik Dans", description: "Enerjini yükselt", imageUrl: "https://placehold.co/300x300/14b8a6/ffffff.png", aiHint: "dj turntable" },
-    { title: "Damar Şarkılar", description: "Duygusal anlar", imageUrl: "https://placehold.co/300x300/f97316/ffffff.png", aiHint: "rainy window" },
-    { title: "Antrenman Modu", description: "Limitleri zorla", imageUrl: "https://placehold.co/300x300/f43f5e/ffffff.png", aiHint: "gym workout" },
-    { title: "Odaklanma Zamanı", description: "Derin konsantrasyon", imageUrl: "https://placehold.co/300x300/06b6d4/ffffff.png", aiHint: "zen stones" },
-    { title: "Efsane Şarkılar", description: "Unutulmaz klasikler", imageUrl: "https://placehold.co/300x300/a855f7/ffffff.png", aiHint: "vinyl record" },
+    { title: "Türkçe Pop Hits", description: "En popüler parçalar", imageUrl: "/Fotoğraflar/TÜRKÇE POP HİTS.063Z.png", aiHint: "pop music" },
+    { title: "Haftanın Keşifleri", description: "Yeni müzikler keşfet", imageUrl: "/Fotoğraflar/haftanın keşifleri.341Z.png", aiHint: "discovery playlist" },
+    { title: "Akustik Akşamlar", description: "Sakin ve huzurlu", imageUrl: "/Fotoğraflar/akustik akşamlar.911Z.png", aiHint: "acoustic guitar" },
+    { title: "Türkçe Rock", description: "Efsanevi riffler", imageUrl: "/Fotoğraflar/TÜKRÇE ROCK.037Z.png", aiHint: "rock concert" },
+    { title: "Yolculuk Şarkıları", description: "Yol arkadaşların", imageUrl: "/Fotoğraflar/YOLCULUK ŞARKILARI.740Z.png", aiHint: "road trip" },
+    { title: "90'lar Pop", description: "Geçmişe yolculuk", imageUrl: "/Fotoğraflar/90lar.973Z.png", aiHint: "retro cassette" },
+    { title: "Yeni Nesil Rap", description: "Sokakların sesi", imageUrl: "/Fotoğraflar/YENİNESİLRAP.797Z.png", aiHint: "urban graffiti" },
+    { title: "Elektronik Dans", description: "Enerjini yükselt", imageUrl: "/Fotoğraflar/elektronik dans.885Z.png", aiHint: "dj turntable" },
+    { title: "Damar Şarkılar", description: "Duygusal anlar", imageUrl: "/Fotoğraflar/damarşarkılar.917Z.png", aiHint: "rainy window" },
+    { title: "Antrenman Modu", description: "Limitleri zorla", imageUrl: "/Fotoğraflar/ANTREMANMODU.333Z.png", aiHint: "gym workout" },
+    { title: "Odaklanma Zamanı", description: "Derin konsantrasyon", imageUrl: "/Fotoğraflar/ODAKLANMA ZAMANI.013Z.png", aiHint: "zen stones" },
+    { title: "Efsane Şarkılar", description: "Unutulmaz klasikler", imageUrl: "/Fotoğraflar/Efsaneşarkılar.885Z.png", aiHint: "vinyl record" },
 ];
 
 

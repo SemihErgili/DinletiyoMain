@@ -12,16 +12,27 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lastfm.freetls.fastly.net',
+        hostname: '**', 
         port: '',
         pathname: '/**',
       }
+    ],
+    unoptimized: process.env.NODE_ENV === 'development',
+    domains: [
+      'i.ytimg.com',
+      'cn2.mainnet.audiusindex.org',
+      'audius-cn1.tikilabs.com',
+      'audius-discovery-1.cultur3stake.com',
+      'audius-discovery-1.theblueprint.xyz',
+      'audius-discovery-11.cultur3stake.com',
+      'audius-discovery-12.cultur3stake.com',
+      'audius-discovery-13.cultur3stake.com',
+      'dn1.monophonic.digital',
+      'dn1.nodeoperator.io',
+      'dn1.stuffisup.com',
+      '*.tikilabs.com',
+      '*.audius.co',
+      '*.audius.org',
     ],
   },
 };
