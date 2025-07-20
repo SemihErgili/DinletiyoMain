@@ -10,7 +10,8 @@ import VerifyEmail from '@/components/emails/verify-email';
 
 // Doğrudan API anahtarını kullanıyoruz (test amaçlı)
 const resend = new Resend('re_Akamv5kD_CMywTwktHwfR1FyWocUS8ojm');
-const domain = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:9002';
+// Use production URL as the primary domain
+const domain = 'https://dinletiyo-main-paf3.vercel.app';
 
 interface User {
   id: string;
